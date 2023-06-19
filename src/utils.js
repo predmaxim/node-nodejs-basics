@@ -12,11 +12,9 @@ export const isExists = async (path) => {
 export const getFiles = async (dirPath) => {
   try {
     const resArr = [];
-    await readdir(dirPath, { withFileTypes: true }).then(filesData => {
-      for (const fileData of filesData) {
-        resArr.push(fileData.name);
-      }
-    });
+    await readdir(dirPath, { withFileTypes: true })
+      .then(filesData => filesData
+        .forEach(file => resArr.push(file.name)));
     return resArr;
   } catch (error) {
     return false;
